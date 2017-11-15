@@ -1,0 +1,99 @@
+<project name="jvx.formlayout-visualization" default="start.complete">
+
+	<!--
+		*****************************************************************
+		* information
+		*****************************************************************
+		-->
+
+	<description>
+		A visualization application for the anchors of the FormLayout.
+	</description>
+
+	<!--
+		*****************************************************************
+		* global properties
+		*****************************************************************
+		-->
+
+	<property name="jar.name" value="jvxformlayoutvisualization.jar" />
+
+	<!--
+		*****************************************************************
+		* general properties
+		*****************************************************************
+		-->
+
+	<property name="build" value="${basedir}/build" />
+	<property name="temp" location="${build}/temp" />
+	<property name="release" location="${build}/release" />
+	<property name="src" value="${basedir}/src" />
+	<property name="lib" value="${basedir}/lib" />
+	<property name="classes" value="${temp}/classes" />
+
+	<!--
+		*****************************************************************
+		* INTERNAL TASKS
+		*****************************************************************
+		-->
+
+	<target name="clean.start">
+		<delete dir="${temp}" />
+		<delete dir="${release}" />
+	</target>
+
+	<target name="clean.stop">
+		<delete dir="${temp}" />
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${build}" />
+		<mkdir dir="${classes}" />
+		<javac srcdir="${src}" destdir="${classes}" includeantruntime="false" debug="on" debuglevel="lines,source" source="1.8" encoding="UTF-8">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+
+		<copy todir="${classes}">
+			<fileset dir="${src}">
+				<include name="**/**" />
+
+				<exclude name="**/*.java" />
+				<exclude name="**/package.html" />
+				<exclude name="META-INF/**" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="jar" depends="compile">
+		<mkdir dir="${release}" />
+		<jar jarfile="${release}/${jar.name}">
+			<manifest>
+				<attribute name="Implementation-Title" value="JVx FormLayout Visualization" />
+				<attribute name="Implementation-Vendor" value="SIB Visions GmbH" />
+				<attribute name="Main-Class" value="com.sibvisions.formlayoutvisualization.Main" />
+			</manifest>
+
+			<zipfileset dir="${classes}">
+				<include name="**/*" />
+			</zipfileset>
+		</jar>
+		<copy file="${lib}/bcel-5.2.jar" todir="${release}" />
+		<copy file="${lib}/jcommon-1.0.16.jar" todir="${release}" />
+		<copy file="${lib}/jvx-2.7-nightly.jar" todir="${release}" />
+		<copy file="${lib}/jvxlua.jar" todir="${release}" />
+		<copy file="${lib}/luaj-jse-3.0.1.jar" todir="${release}" />
+		<copy file="${lib}/rsyntaxtextarea-2.5.8.jar" todir="${release}" />
+	</target>
+
+	<!--
+		*****************************************************************
+		* PUBLIC START TASKS
+		*****************************************************************
+		-->
+
+	<target name="start.complete" depends="clean.start, jar, clean.stop" description="Creates the release jar" />
+</project>
