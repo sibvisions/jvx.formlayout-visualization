@@ -298,6 +298,7 @@ public class MainFrame extends UIFrame
 		addBorder(codePanel, IAlignmentConstants.ALIGN_LEFT, IAlignmentConstants.ALIGN_STRETCH);
 		
 		setLayout(new UIBorderLayout());
+		setIconImage(UIImage.getImage("/com/sibvisions/formlayoutvisualization/images/icon.png"));
 		setSize(1024, 600);
 		setTitle("Formlayout Visualization");
 		add(headerPanel, UIBorderLayout.NORTH);
