@@ -148,6 +148,7 @@ public class MainFrame extends UIFrame
 			});
 			
 			codeTextArea.setText(new String(FileUtil.getContent(ResourceUtil.getResourceAsStream("/com/sibvisions/formlayoutvisualization/default.lua")), StandardCharsets.UTF_8));
+			codeTextArea.setCaretPosition(0);
 			codeTextArea.getDocument().addDocumentListener(new CodeChangedListener());
 			
 			updateLayout();
