@@ -10,6 +10,8 @@ the FormLayout.
 Launch the project with the attached launcher or build it and launch
 the resulting jar.
 
+See also the [FormLayout Documentation](https://doc.sibvisions.com/jvx/reference?s[]=formlayout#formlayout)
+
 # License
 
 jvx.formlayout-visualization is licensed under Apache 2.0.
